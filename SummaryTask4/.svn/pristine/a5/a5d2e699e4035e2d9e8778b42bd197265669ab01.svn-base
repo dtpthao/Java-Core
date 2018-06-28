@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- XML schema -->
+
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	targetNamespace="http://nure.ua/thao/SummaryTask4/db/entity" xmlns:tns="http://nure.ua/thao/SummaryTask4/db/entity">
+
+	<xsd:element name="Test">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="TestText" type="xsd:string" />
+				<xsd:element name="CategoryId" type="tns:CategoryId"
+					maxOccurs='3' />
+				<xsd:element name="LevelId" type="tns:LevelId" maxOccurs='1' />
+				<xsd:element name="Duration" type="xsd:int"
+					maxOccurs='1' />
+				<xsd:sequence>
+					<xsd:element name="Question" type="tns:Question"
+						maxOccurs="unbounded" />
+				</xsd:sequence>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:simpleType name="CategoryId" final="restriction">
+		<xsd:restriction base="xsd:unsignedInt">
+			<xsd:enumeration value="0" />
+			<xsd:enumeration value="1" />
+			<xsd:enumeration value="2" />
+		</xsd:restriction>
+	</xsd:simpleType>
+
+	<xsd:simpleType name="LevelId" final="restriction">
+		<xsd:restriction base="xsd:unsignedInt">
+			<xsd:enumeration value="0" />
+			<xsd:enumeration value="1" />
+			<xsd:enumeration value="2" />
+		</xsd:restriction>
+	</xsd:simpleType>
+
+	<xsd:complexType name="Question">
+		<xsd:sequence>
+			<xsd:element name="QuestionText" type="xsd:string" />
+			<xsd:sequence>
+				<xsd:element name="Answer" type="tns:Answer" maxOccurs="7" />
+			</xsd:sequence>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="Answer" mixed="true">
+		<xsd:attribute name="correct" type="xsd:boolean"
+			default="false" />
+	</xsd:complexType>
+</xsd:schema>

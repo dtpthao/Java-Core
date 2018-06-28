@@ -1,0 +1,41 @@
+
+<%@ page import="ua.nure.thao.SummaryTask4.db.Role"%>
+<%@ include file="/WEB-INF/jspf/directive/page.jspf"%>
+<%@ include file="/WEB-INF/jspf/directive/taglib.jspf"%>
+
+<div style="background: #E0E0E0; height: 55px; padding: 5px;">
+	<div style="float: left">
+		<h1>Student Test</h1>
+	</div>
+
+	<div style="float: right; padding: 10px; text-align: right;">
+		<c:choose>
+			<c:when test="${userRole.name == 'admin' }">
+				<a href="controller?command=listTestToEdit">All tests</a> &nbsp;
+				<a href="controller?command=listUser">All users</a> &nbsp;
+				<a href="controller?command=statisticUsersResult">Results</a> &nbsp;
+			</c:when>
+
+			<c:when test="${userRole.name == 'student'}">
+				<a href="controller?command=listTestToDo">All tests</a> &nbsp;
+				<a href="controller?command=listResult&userId=${user.id}">Results</a> &nbsp;
+		</c:when>
+		</c:choose>
+
+		<a href="controller?command=viewSettings">Settings</a> &nbsp;
+		<c:if test="${not empty user}">
+			<c:out value="${user.firstName} ${user.lastName}" />
+			<c:if test="${not empty userRole}">
+				<c:out value="(${userRole.name})" />
+			</c:if>
+
+			<a href="controller?command=logout"> Logout </a>
+		</c:if>
+		<c:if test="${empty user and title ne 'Login'}">
+			<div id="rightHeader">
+				<a href="login.jsp">Login</a>
+			</div>
+		</c:if>
+	</div>
+
+</div>
