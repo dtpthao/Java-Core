@@ -1,0 +1,42 @@
+package ua.nure.thao.Practice5;
+
+public class Part1 {
+	
+	private static class UsingRunnable implements Runnable{
+
+		@Override
+		public void run() {
+			for (int i = 0; i < 4; i++) {
+	            System.out.println(Thread.currentThread().getName());
+	            try {                
+	                Thread.sleep(500);
+	            } catch (InterruptedException ie) {}
+	        }
+		}
+	}
+	
+	private static class UsingThread extends Thread{
+
+		public void run() {
+			for (int i = 0; i < 4; i++) {
+	            System.out.println(getName());
+	            try {                
+	                Thread.sleep(500);
+	            } catch (InterruptedException ie) {}
+	        }
+		}
+	}
+
+
+	public static void main(String[] args) throws InterruptedException {
+		
+		Thread t1 = new Thread(new UsingRunnable());
+		UsingThread t2 = new UsingThread();
+		
+		t1.start();
+		t1.join();
+		t2.start();
+		t2.join();
+	}
+
+}

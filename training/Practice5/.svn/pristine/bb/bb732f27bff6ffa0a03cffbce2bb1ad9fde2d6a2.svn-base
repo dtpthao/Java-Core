@@ -1,0 +1,96 @@
+package ua.nure.thao.Practice5;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.Scanner;
+
+public class Part4 {
+	
+	static int MultiThread(int[][] mas) throws InterruptedException {
+		Thread[] th = new Thread[mas.length];
+		int[] max = new int[mas.length];
+		for(int i = 0; i < mas.length; i++) {
+			final Integer iFinal = new Integer(i);
+			
+			th[i] = new Thread() {
+				
+				public void run() {
+					max[iFinal] = Part4.findMax(mas[iFinal]);
+					try {
+						Thread.sleep(1);
+					} catch (InterruptedException ie) {};
+				};
+			};
+		}
+		for(int i = 0; i < mas.length; i++) { th[i].start(); }
+		for(int i = 0; i < mas.length; i++) { th[i].join(); }
+		return Part4.findMax(max);
+	}
+	
+	static int OneThread(int[][] mas) {
+		
+		int[] max = new int[mas.length];
+		for(int i = 0; i< mas.length; i++) {
+			max[i] = Part4.findMax(mas[i]);
+			try {
+				Thread.sleep(1);
+			} catch (InterruptedException ie) {};
+		}
+		return Part4.findMax(max);
+	}
+	
+	public static void main(String[] args) throws InterruptedException {
+		
+		String input = getInput("part4.txt");
+		int[][] mas = string2digit(input);
+		
+		long t = System.currentTimeMillis();
+		System.out.println(Part4.MultiThread(mas));
+		System.out.println(System.currentTimeMillis() - t);
+	
+		t = System.currentTimeMillis();
+		System.out.println(Part4.OneThread(mas));
+		System.out.println(System.currentTimeMillis() - t);
+		
+	}
+	
+	static int findMax(int[] mas) {
+		int max = mas[0];
+		for(int i : mas) {
+			max = (max < i) ? i : max;
+		}
+		return max;
+	}
+	
+	public static String getInput(String fileName) {
+		
+		StringBuilder sb = new StringBuilder();
+		try {
+			Scanner sc = new Scanner(new File(fileName), "cp1251");
+			while (sc.hasNextLine()) {
+				sb.append(sc.nextLine()).append(System.lineSeparator());
+			}
+			return sb.toString().trim();
+		} catch (IOException e) {}
+		
+		return sb.toString();
+	}
+	
+	public static int[][] string2digit(String input) {
+		
+		String[] rows = input.split("\n");
+		int[][] mas = new int[rows.length][];
+		
+		for (int i = 0; i < rows.length; i++) {
+			
+			String[] cols = rows[i].split(" ");
+			mas[i] = new int[cols.length];
+			
+			for(int j = 0; j < cols.length; j++) {
+				mas[i][j] = Integer.parseInt(cols[j]);
+			}
+		}
+		return mas;
+	}
+	
+}

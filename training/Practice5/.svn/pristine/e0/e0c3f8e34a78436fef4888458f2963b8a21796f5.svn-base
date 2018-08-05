@@ -1,0 +1,74 @@
+package ua.nure.thao.Practice5;
+
+import java.util.Random;
+
+public class Part4 {
+	
+	final static int size1 = 8;
+	final static int size2 = 1000;
+	
+	static int findMax(int[] mas) {
+		int max = mas[0];
+		for(int i : mas) {
+			max = (max < i) ? i : max;
+		}
+		return max;
+	}
+	
+	static int MultiThread(int[][] mas2) throws InterruptedException {
+		Thread[] th = new Thread[size1];
+		int[] max = new int[size1];
+		
+		for(int i = 0; i < size1; i++) {
+			final Integer iFinal = new Integer(i);
+			th[i] = new Thread() {
+				public void run() {
+					max[iFinal] = Part4.findMax(mas2[iFinal]);
+					try {
+						Thread.sleep(1);
+					} catch (InterruptedException ie) {};
+				};
+			};
+		}
+		for(int i = 0; i < size1; i++) {
+			th[i].start();
+			th[i].join();
+		}
+		return Part4.findMax(max);
+	}
+	
+	static int Classic(int[][] mas) {
+		
+		int[] max = new int[size1];
+		for(int i = 0; i< size1; i++) {
+			max[i] = Part4.findMax(mas[i]);
+		}
+		return Part4.findMax(max);
+	}
+	
+	public static void main(String[] args) throws InterruptedException {
+		
+		Random rd = new Random();
+		int[][] mas = new int[size1][];
+		
+		for(int i = 0; i < size1; i++) {
+			mas[i] = new int[size2];
+		}
+		
+		for(int i = 0; i < size1; i++) {
+			for(int j = 0; j < size2; j++) {
+				mas[i][j] = rd.nextInt(1000);
+			}
+		}
+		
+		long t = System.currentTimeMillis();
+		System.out.println(Part4.MultiThread(mas));
+		System.out.println(System.currentTimeMillis() - t);
+	
+		t = System.currentTimeMillis();
+		System.out.println(Part4.Classic(mas));
+		System.out.println(System.currentTimeMillis() - t);
+		
+	}
+	
+}
