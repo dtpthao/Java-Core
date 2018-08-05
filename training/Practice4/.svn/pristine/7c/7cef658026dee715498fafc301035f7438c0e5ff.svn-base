@@ -1,0 +1,29 @@
+package ua.nure.thao.Practice4;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import java.util.Iterator;
+
+import org.junit.jupiter.api.Test;
+
+class Part4Test {
+
+	@Test
+	public void test() {
+		Part4 part4 = new Part4();
+		String expected = "This is 1st sentence.\n 2rd sentence."
+				+ "\n last sentence.\n";
+		
+		part4.setInput(Demo.getInput("part4.txt"));
+		Iterator<Object> iterator = part4.iterator();
+		
+		String s;
+		StringBuilder actual = new StringBuilder();
+		
+		while ((s = (String) iterator.next()) != null) {
+			actual.append(s + "\n");
+		}
+		assertEquals(expected, actual.toString());
+	}
+
+}

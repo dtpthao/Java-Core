@@ -1,0 +1,49 @@
+package ua.nure.thao.Practice4;
+
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.Locale;
+import java.util.Properties;
+import java.util.ResourceBundle;
+import java.util.Scanner;
+
+public class Part5 {
+	
+	private Properties propertiesEn;
+    private Properties propertiesRu;
+	
+//	Part5() throws IOException {
+//
+//		propertiesEn = new Properties();
+//        propertiesRu = new Properties();
+//        propertiesEn.load(new FileReader("src/resources_en.properties"));
+//        propertiesRu.load(new FileReader("src/resources_ru.properties"));
+//	}
+	
+	public static String getMessages(String key, String locale) {
+	    Locale local = new Locale(locale);
+	    ResourceBundle resourceBundle = ResourceBundle.getBundle("resources", local);
+	    return resourceBundle.getString(key);
+	}
+	
+	public String translate(String key, String local) {
+		
+		return local.equals("en") ? propertiesEn.getProperty(key) 
+				: propertiesRu.getProperty(key);
+	}
+	
+	public static void main(String[] args) throws IOException {
+        
+		Part5 part5 = new Part5();
+        Scanner sc = new Scanner(System.in);
+        String key = null, local = null;
+        while (sc.hasNextLine()) {
+        		key = sc.next();
+        		local = sc.next();
+        		if (local.contains("stop") || key.contains("stop")) {
+        			break;
+        		}
+        		System.out.println(key + " = " + part5.getMessages(key,local));
+        }
+	}
+}

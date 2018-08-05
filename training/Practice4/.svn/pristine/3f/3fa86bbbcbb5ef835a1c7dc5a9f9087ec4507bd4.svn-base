@@ -1,0 +1,17 @@
+package ua.nure.thao.Practice4;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+import org.junit.jupiter.api.Test;
+
+class Part1Test {
+
+	@Test
+	public void mainTest(String[] args) {
+		Part1 part1 = new Part1();
+		String expected = "WHEN I was YOUNGER\nSo MUCH YOUNGER\nTHAN TODAY\n"
+				+ "ИНФОРМАЦИЮ из ФАЙЛА\nв ВЕРХНИЙ РЕГИСТР\n";
+		String actual = Part1.main(args);
+		assertEquals(expected, actual);
+	}
+}

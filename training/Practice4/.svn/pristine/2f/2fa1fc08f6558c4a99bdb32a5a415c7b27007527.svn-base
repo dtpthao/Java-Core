@@ -1,0 +1,24 @@
+package ua.nure.thao.Practice4;
+
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+public class Part1 {
+
+	public static void main(String[] args) {
+		
+		StringBuilder input = new StringBuilder(Demo.getInput("part1.txt"));
+		
+		String regex = "(?Um)([\\w]{4,})";
+		Pattern pattern = Pattern.compile(regex);
+		Matcher matcher = pattern.matcher(input.toString());
+		
+		String word;
+		while (matcher.find()) {
+			word = matcher.group(1);
+			input.replace(matcher.start(), word.length() 
+					+ matcher.start(), word.toUpperCase());
+		}
+		System.out.println(input);
+	}
+}

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<bank>
+<Deposit>
+<Name>Bitcoin</Name>
+<Country>Ukraine</Country>
+<Depositor>Thao</Depositor>
+<AccountID>ID-1</AccountID>
+<Type>Demand</Type>
+<AmountOnDeposit>3333333</AmountOnDeposit>
+<Profitability>0.15</Profitability>
+<TimeConstraints>draft</TimeConstraints>
+</Deposit>
+<Deposit>
+<Name>Privat</Name>
+<Country>Ukraine</Country>
+<Depositor>Masha</Depositor>
+<AccountID>ID-2</AccountID>
+<Type>Term</Type>
+<AmountOnDeposit>2937983</AmountOnDeposit>
+<Profitability>0.1</Profitability>
+<TimeConstraints>draft</TimeConstraints>
+</Deposit>
+</bank>

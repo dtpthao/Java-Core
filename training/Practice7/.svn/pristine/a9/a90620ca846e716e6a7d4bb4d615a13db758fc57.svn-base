@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--  Input XML document. This XML is valid against Test-with-targetNamespace.xsd -->
+
+<practice7:Bank xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xmlns:practice7="http://knure.kharkov.ua/jt/practice7"
+		xsi:schemaLocation=
+			"http://knure.kharkov.ua/jt/practice7 
+			Bank-with-targetNamespace.xsd">		
+
+	<Deposit>
+		<Name>BlockChain</Name>
+		<Country></Country>
+		<Depositor>Thao</Depositor>
+		<AccountID>ID-3</AccountID>
+		<Type>Demand</Type>
+		<AmountOnDeposit>3333333</AmountOnDeposit>
+		<Profitability>0.15</Profitability>
+		<TimeConstraints>P2Y</TimeConstraints>
+	</Deposit>
+	
+	<Deposit>
+		<Name>Privat</Name>
+		<Country>Ukraina</Country>
+		<Depositor>Someone</Depositor>
+		<AccountID>ID-1</AccountID>
+		<Type>Saving</Type>
+		<AmountOnDeposit>0293410</AmountOnDeposit>
+		<Profitability>0</Profitability>
+		<TimeConstraints>P1Y</TimeConstraints>
+	</Deposit>
+
+	<Deposit>
+		<Name>Paypal</Name>
+		<Country>Ukraine</Country>
+		<Depositor>SomeoneElse</Depositor>
+		<AccountID>ID-2</AccountID>
+		<Type>Term</Type>
+		<AmountOnDeposit>2937983</AmountOnDeposit>
+		<Profitability>0.1</Profitability>
+		<TimeConstraints>P2Y</TimeConstraints>
+	</Deposit>			
+</practice7:Bank>

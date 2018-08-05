@@ -1,0 +1,155 @@
+package ua.nure.thao.Practice4;
+
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.EOFException;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+
+public class Part2 {
+	
+	public void Write2File(String filename,
+			List<Integer> list) throws IOException {
+		
+		File f = new File(filename);
+		FileOutputStream out = new FileOutputStream(new File(filename));
+		DataOutputStream data = new DataOutputStream(out);
+		for(int i : list) {
+			data.writeInt(i);
+		}
+		f.exists();
+		out.close();
+		data.close();
+	}
+	
+	public void Write2File2(String filename,
+			int[] list) throws IOException {
+		
+		File f = new File(filename);
+		FileOutputStream out = new FileOutputStream(new File(filename));
+		DataOutputStream data = new DataOutputStream(out);
+		for(int i = 0; i < list.length; i++) {
+			data.writeInt(list[i]);
+		}
+		f.exists();
+		out.close();
+		data.close();
+	}
+	
+	public List<Integer> ReadFile(String filename) throws IOException {
+		
+	   FileInputStream fin = new FileInputStream(filename);
+	   DataInputStream data = new DataInputStream(fin);
+
+//	   int[] list = new int[19];
+	   List<Integer> list = new ArrayList<Integer>();
+	   int i = 0;
+	   try {
+		   while ((i = data.readInt()) != -1) { 
+			   if (i == 1162694740) break;
+			   list.add(i);
+		   }
+//		   while ((list[i] = data.readInt()) != -1) { i++;}
+	   } catch (EOFException e) {};
+//	   list = Arrays.copyOf(list, i);
+	   fin.close();
+	   data.close();
+	   return list;
+	}
+	
+	public void write2File(String fileName, int[] masInt) throws IOException{
+		StringBuilder sb = new StringBuilder();
+		for(int i : masInt) {
+			sb.append(String.valueOf(i)).append(" ");
+		}
+		FileOutputStream out = new FileOutputStream(new File(fileName));
+		DataOutputStream data = new DataOutputStream(out);
+		data.writeUTF(sb.toString());
+	}
+	
+	public void Sort(int[] masInt) {
+		
+		for(int i = 0; i< masInt.length - 1; i++) 
+			for(int j = i; j < masInt.length; j++) {
+				if (masInt[j] < masInt[i]) {
+					masInt[i] -= masInt[j];
+					masInt[j] += masInt[i];
+					masInt[i] = masInt[j] - masInt[i];
+				}
+			}
+	}
+	
+	public static void main(String[] args) throws IOException {
+		
+		Part2 part2 = new Part2();
+//		Random rd = new Random();
+//		int[] in = new int[10];
+//		for (int i = 0; i < 10; i++) {
+//			 in[i] = rd.nextInt(50);
+//			// System.out.print(input[i] + " ");
+//		}
+//		//
+//		part2.write2File("part2.txt", in);
+		String input = Demo.getInput("part2.txt");
+		
+		if (!input.contains("EMPTY")) {
+			String[] sInput = input.split("\\s");
+			int[] masInt = new int[10];
+			for(int i = 0; i < sInput.length; i++) {
+				masInt[i] = Integer.parseInt(sInput[i]);
+			}
+			System.out.print("Input\t==> ");
+			for(int i : masInt) 
+				System.out.print(i + " ");
+			System.out.println();
+			part2.Sort(masInt);
+			System.out.print("Output\t==> ");
+			for(int i : masInt) 
+				System.out.print(i + " ");
+			System.out.println();
+			part2.write2File("part2_sorted.txt", masInt);
+		}
+		else System.out.println("EMPTY");
+	}
+
+//	public static void main2(String[] args) throws IOException {
+//		
+//		Part2 part2 = new Part2();
+////		int[] input = new int[10];
+//		List<Integer> input = new ArrayList<Integer>();
+//		Random rd = new Random();
+////		
+//		for(int i = 0; i < 10; i++) {
+//			input.add(rd.nextInt(50));
+////			input[i] = rd.nextInt(50);
+////			System.out.print(input[i] + " ");
+//		}
+////		
+//		part2.Write2File("part2.txt", input);
+//		
+////		System.out.print("Output\t==> ");
+////		int[] list2 = part2.ReadFile("part2.txt");
+//		List<Integer> list2 = new ArrayList<>(part2.ReadFile("part2.txt"));
+//		if (list2.size() > 0) {
+//			System.out.print("Input\t==> ");
+//			for(int i : list2) 
+//				System.out.print(i + " ");
+//			System.out.println();
+//			Integer[] mas2 = list2.toArray(new Integer[list2.size()]);
+//			part2.Sort(mas2);
+//			list2 = Arrays.asList(mas2);
+//			System.out.print("Output\t==> ");
+//			for(int i : list2) 
+//				System.out.print(i + " ");
+//			System.out.println();
+//		}
+//		else System.out.println("EMPTY");
+//		part2.Write2File("part2_sorted.txt", list2);
+//	}
+
+}

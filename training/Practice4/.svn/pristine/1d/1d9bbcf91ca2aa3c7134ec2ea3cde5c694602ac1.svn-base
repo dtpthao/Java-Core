@@ -1,0 +1,13 @@
+package ua.nure.thao.Practice4;
+
+import org.junit.jupiter.api.Test;
+
+class Part2Test {
+
+	@Test
+	public void SortTest() {
+		Part2 part2 = new Part2();
+		
+	}
+
+}

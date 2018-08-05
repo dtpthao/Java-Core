@@ -1,0 +1,19 @@
+package ua.nure.thao.Practice1;
+
+public class Part3 {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		int x, y, tmp;
+		x = Integer.parseInt(args[0]);
+		y = Integer.parseInt(args[1]);
+		System.out.print("gcd("+x+", "+y+") = ");
+		while (x % y != 0) {
+			tmp = y;
+			y = x % y;
+			x = tmp;
+		}
+
+		System.out.println(y);
+	}
+}

@@ -1,0 +1,20 @@
+package ua.nure.thao.Practice4;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import org.junit.jupiter.api.Test;
+
+class Part3Test {
+
+	@Test
+	public void ReadFileTest() {
+		Part3 part3 = new Part3();
+		String input = Demo.getInput("part3.txt");
+		String expected = "a и л \nbcd фвыа \n432 89 \n43.44 .98 ";
+		StringBuilder actual = new StringBuilder(part3.Readfile(input, "char"));
+		actual.append("\n").append(part3.Readfile(input, "String"));
+		actual.append("\n").append(part3.Readfile(input, "int"));
+		actual.append("\n").append(part3.Readfile(input, "double"));
+		assertEquals(expected, actual.toString());
+	}
+}

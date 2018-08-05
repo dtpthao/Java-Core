@@ -1,0 +1,37 @@
+package ua.nure.thao.Practice4;
+
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.Properties;
+import java.util.Scanner;
+
+public class Part5 {
+	
+	
+	public static void main(String[] args) throws IOException {
+		
+		FileReader readEn = new FileReader("resources_en.properties");
+		FileReader readRu = new FileReader("resources_ru.properties");
+
+		Properties propertiesEn = new Properties();
+        Properties propertiesRu = new Properties();
+        propertiesEn.load(readEn);
+        propertiesRu.load(readRu);
+        
+        Scanner sc = new Scanner(System.in);
+        String key = null, local = null;
+        while (sc.hasNext()) {
+        		key = sc.next();
+        		local = sc.next();
+        		if (local.equals("en")) {
+        			System.out.println(key + " = " + propertiesEn.getProperty(key));
+        		}
+        		else if (local.equals("ru")) {
+        			System.out.println(key + " = " + propertiesRu.getProperty(key));
+        		}
+        		else if (local.contains("stop") || key.contains("stop")) {
+        			break;
+        		}
+        }
+	}
+}

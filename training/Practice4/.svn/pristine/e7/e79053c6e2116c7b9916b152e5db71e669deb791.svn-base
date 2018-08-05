@@ -1,0 +1,20 @@
+package ua.nure.thao.Practice4;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import java.io.IOException;
+
+import org.junit.jupiter.api.Test;
+
+class Part5Test {
+
+	@Test
+	void test() throws IOException {
+		Part5 part5 = new Part5();
+		String expected = "стол\ntable\nяблуко";
+		StringBuilder actual = new StringBuilder(part5.translate("table", "ru"));
+		actual.append("\n").append(part5.translate("table", "en"));
+		actual.append("\n").append(part5.translate("apple", "ru"));
+		assertEquals(expected, actual.toString());
+	}
+}

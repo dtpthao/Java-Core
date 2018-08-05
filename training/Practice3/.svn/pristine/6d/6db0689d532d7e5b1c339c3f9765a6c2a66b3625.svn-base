@@ -1,0 +1,25 @@
+package ua.nure.thao.Practice3.part3;
+
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+public class Part3 {
+
+	public static void main(String[] args) {
+
+		StringBuilder sb = new StringBuilder(args[0]);
+		String regex = "\\W?(\\w*[^$\\W])";
+		Pattern pattern = Pattern.compile(regex);
+		Matcher matcher = pattern.matcher(sb);
+		int index = 0;
+		String ch;
+		while (matcher.find()) {
+			index = matcher.start();
+			if (index == 0) index = -1;
+			ch = String.valueOf(sb.charAt(index + 1));
+			sb.replace(index + 1, index + 2, ch.toUpperCase());
+		}
+		System.out.println(sb);
+	}
+	
+}

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--  XML schema -->
+
+<!--============================================================
+This XML schema contains no targetNamespace.
+ALL declared names belong to NO NAMESPACE.
+=============================================================-->
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<xsd:element name="Bank">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="Deposit" 
+					type="tns:Deposit" maxOccurs="unbounded"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	
+	<xsd:complexType name="Deposit">
+		<xsd:sequence>
+			<xsd:element name="Name" type="xsd:string"/>
+			<xsd:element name="Country" type="xsd:token"/>
+			<xsd:element name="Depositor" type="xsd:string"/>
+			<xsd:element name="AccountID" type="xsd:ID" />
+			<xsd:element name="Type" type="tns:Type" />
+			<xsd:element name="AmountOnDeposit" type="xsd:decimal" />
+			<xsd:element name="Profitability" type="xsd:decimal" />
+			<xsd:element name="TimeConstraints" type="xsd:duration" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:simpleType name="Type" final="restriction">
+		<xsd:restriction base="xsd:string">
+    			<xsd:enumeration value="Demand"/>
+    			<xsd:enumeration value="Fixed"/>
+    			<xsd:enumeration value="Term"/>
+    			<xsd:enumeration value="Saving"/>
+    			<xsd:enumeration value="Accumulative"/>
+    			<xsd:enumeration value="Metal"/>
+  		</xsd:restriction>
+	</xsd:simpleType>
+</xsd:schema>

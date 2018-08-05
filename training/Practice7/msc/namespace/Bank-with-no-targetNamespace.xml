@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--  Input XML document. This XML is valid against Test-with-no-targetNamespace.xsd -->
+
+<!--============================================================
+When we use xsi:noNamespaceSchemaLocation in XML 
+we directly determine that XSD has NO target namespace.
+ALL declared in XSD names we used in XML belong to NO NAMESPACE.
+=============================================================-->
+<Bank xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xsi:noNamespaceSchemaLocation="Bank-with-no-targetNamespace.xsd">		
+	<Deposit>
+		<Name>BlockChain</Name>
+		<Country></Country>
+		<Depositor>Thao</Depositor>
+		<AccountID>ID-3</AccountID>
+		<Type>Demand</Type>
+		<AmountOnDeposit>3333333</AmountOnDeposit>
+		<Profitability>0.15</Profitability>
+		<TimeConstraints>P2Y</TimeConstraints>
+	</Deposit>
+	
+	<Deposit>
+		<Name>Privat</Name>
+		<Country>Ukraina</Country>
+		<Depositor>Someone</Depositor>
+		<AccountID>ID-1</AccountID>
+		<Type>Saving</Type>
+		<AmountOnDeposit>0293410</AmountOnDeposit>
+		<Profitability>0</Profitability>
+		<TimeConstraints>P1Y</TimeConstraints>
+	</Deposit>
+
+	<Deposit>
+		<Name>Paypal</Name>
+		<Country>Ukraine</Country>
+		<Depositor>SomeoneElse</Depositor>
+		<AccountID>ID-2</AccountID>
+		<Type>Term</Type>
+		<AmountOnDeposit>2937983</AmountOnDeposit>
+		<Profitability>0.1</Profitability>
+		<TimeConstraints>P2Y</TimeConstraints>
+	</Deposit>			
+</Bank>

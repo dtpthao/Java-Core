@@ -1,0 +1,150 @@
+package ua.nure.thao.Practice2;
+
+import java.util.Iterator;
+
+public class MyListImpl implements MyList, ListIterable{
+	
+	Object[] list;
+	int size;
+	int currentIndex;
+	boolean lastChange;
+	
+	public MyListImpl() {
+		this.list = new Object[100];
+		this.size = 0;
+	}
+	
+	@Override
+	public void add(Object e) {
+		if (e != null) { 
+			this.list[size] = e;
+			this.size++;
+		}
+	}
+
+	@Override
+	public void clear() {
+		this.size = 0;
+	}
+
+	@Override
+	public boolean remove(Object o) {
+		int i = 0;
+		while ((this.list[i] != o) && (i < this.size) ) i++;
+		if (i == this.size) return false;
+		for(; i < this.size - 1; i++) {
+			this.list[i] = this.list[i + 1];
+		}
+		this.size--;
+		return true;
+	}
+
+	@Override
+	public Object[] toArray() {
+		Object[] newObj = new Object[this.size];
+		for(int i = 0; i< this.size; i++) 
+			newObj[i] = this.list[i];
+		return newObj;//Arrays.copyOf(list, size);
+	}
+
+	@Override
+	public int size() {
+		return this.size;
+	}
+
+	@Override
+	public boolean contains(Object o) {
+		int i = 0;
+		while ((this.list[i] != o) && (i < this.size) ) i++;
+		if (i == this.size) return false;
+		return true;
+	}
+
+	@Override
+	public boolean containsAll(MyList c) {
+		if (c instanceof  MyListImpl == true) {
+			MyListImpl cImpl = (MyListImpl)c;
+			for(int i = 0; i < cImpl.size; i++) {
+				if (this.contains(cImpl.list[i]) == false)
+					return false;
+			}
+			return true;
+		}
+		return false;
+	}
+	
+	@Override
+    public String toString() {
+		String s= "";
+		for(int i = 0; i < this.size - 1; i++) {
+			s += this.list[i] + ", ";
+		}
+		if (this.size != 0) s += this.list[this.size -1];
+       return "[" + s + "]";
+    }
+	
+/////////////========Part 2========///////////////////////
+	
+	public Iterator<Object> iterator() {
+	    return new IteratorImpl();
+	}
+	 
+	private class IteratorImpl implements Iterator<Object> {
+		
+		public IteratorImpl() {
+			MyListImpl.this.currentIndex = 0;
+			MyListImpl.this.lastChange = false;
+		}
+		
+		public boolean hasNext() {
+			return (MyListImpl.this.currentIndex < MyListImpl.this.size) ? true : false; 
+		}
+	 
+		public Object next() {
+			if (this.hasNext()) {
+				MyListImpl.this.lastChange = true;
+				return MyListImpl.this.list[MyListImpl.this.currentIndex++];
+			}
+			return null;
+		}
+	      
+		public void remove() {
+			if (MyListImpl.this.lastChange == false) 
+				throw new IllegalStateException();
+			MyListImpl.this.remove(MyListImpl.this.list[--MyListImpl.this.currentIndex]);
+			MyListImpl.this.lastChange = false;
+		}    	
+	}
+	
+/////////////========Part 3========///////////////////////
+	
+	public ListIterator listIterator() {
+	    return new ListIteratorImpl();
+	}
+	
+	private class ListIteratorImpl extends IteratorImpl implements ListIterator {
+		
+		@Override
+		public boolean hasPrevious() {
+			return (MyListImpl.this.currentIndex > 0) ? true : false;
+		}
+
+		@Override
+		public Object previous() {
+			if (this.hasPrevious()) {
+				MyListImpl.this.lastChange = true;
+				return MyListImpl.this.list[--MyListImpl.this.currentIndex];
+			}
+			return null;
+		}
+
+		@Override
+		public void set(Object e) {
+			if (MyListImpl.this.lastChange == false) 
+				throw new IllegalStateException();
+			MyListImpl.this.list[--MyListImpl.this.currentIndex] = e;
+			MyListImpl.this.lastChange = false;		
+		}
+	}
+	
+}

@@ -1,0 +1,76 @@
+package ua.nure.thao.Practice4;
+
+import java.io.*;
+import java.util.Arrays;
+import java.util.Random;
+
+public class Part2 {
+	
+	private void Write2File(String filename,
+			int[] list, int len) throws IOException {
+		
+		File f = new File(filename);
+		FileOutputStream out = new FileOutputStream(new File(filename));
+		DataOutputStream data = new DataOutputStream(out);
+		for(int i = 0; i < len; i++) {
+			data.writeInt(list[i]);
+		}
+		f.exists();
+		out.close();
+		data.close();
+	}
+	
+	private int[] ReadFile(String filename) throws IOException {
+		
+	   FileInputStream fin = new FileInputStream(filename);
+	   DataInputStream data = new DataInputStream(fin);
+
+	   int[] list = new int[19];
+	   int i = 0;
+	   try {
+		   while ((list[i] = data.readInt()) != -1) { i++;}
+	   } catch (EOFException e) {};
+	   list = Arrays.copyOf(list, i);
+	   fin.close();
+	   data.close();
+	   return list;
+	}
+	
+	public int[] Sort(int[] list) {
+		
+		for(int i = 0; i< 9; i++) 
+			for(int j = i; j < 10; j++) {
+				if (list[j] < list[i]) {
+					list[i] -= list[j];
+					list[j] += list[i];
+					list[i] = list[j] - list[i];
+				}
+			}
+		return null;
+	}
+
+	public static void main(String[] args) throws IOException {
+		
+		Part2 part2 = new Part2();
+		int[] list = new int[10];
+		Random rd = new Random();
+		System.out.print("Input\t==> ");
+		for(int i = 0; i < 10; i++) {
+			list[i] = rd.nextInt(50);
+			System.out.print(list[i] + " ");
+		}
+		
+		part2.Write2File("part2.txt", list, 10);
+		System.out.println();
+		
+		System.out.print("Output\t==> ");
+		int[] list2 = part2.ReadFile("part2.txt");
+		
+		part2.Sort(list2);
+		for(int i = 0; i < list2.length; i++) 
+			System.out.print(list2[i] + " ");
+		System.out.println();
+		part2.Write2File("part2_sorted.txt", list2, list2.length);
+	}
+
+}
